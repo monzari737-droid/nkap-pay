@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NKAP EXPRESS - Paiement</title>
+    <style>
+        body { background: #0b0e11; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
+        .card { background: #1c2128; border: 2px solid #f0b90b; border-radius: 15px; padding: 30px; max-width: 400px; margin: auto; }
+        h1 { color: #f0b90b; }
+        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 18px; }
+        .btn-depot { background: #2ebd85; color: white; }
+        .btn-retrait { background: #f0b90b; color: #0b0e11; }
+        p { font-size: 14px; color: #848e9c; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🎰 NKAP EXPRESS</h1>
+        <p>Sélectionnez une opération :</p>
+        
+        <!-- Le lien Notch Pay sera injecté par le bot ou mis à jour ici -->
+        <a href="https://notchpay.co" class="btn btn-depot">💳 FAIRE UN DÉPÔT</a>
+        
+        <a href="https://t.me" class="btn btn-retrait">📤 FAIRE UN RETRAIT</a>
+        
+        <hr style="border: 0.5px solid #2d333b; margin: 20px 0;">
+        <p>⚠️ Après le dépôt, copiez la <b>Référence</b> et collez-la dans le Bot pour valider votre solde.</p>
+    </div>
+</body>
+</html>
