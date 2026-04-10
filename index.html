@@ -3,75 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NKAP EXPRESS CASINO</title>
-    
-    <!-- IMPORT DU GRAPHISME -->
     <link rel="stylesheet" href="style.css">
-    
-    <!-- IMPORT DU SCRIPT TELEGRAM -->
     <script src="https://telegram.org"></script>
 </head>
 <body>
-
-    <!-- SECTION AUTHENTIFICATION -->
-    <div id="auth-screen" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
-        <h1 class=" gold-text" style="color:var(--gold)">🎰 NKAP EXPRESS</h1>
-        <p>Entrez votre Code Secret :</p>
-        <input type="password" id="auth-code" style="padding:15px; border-radius:10px; text-align:center; font-size:20px;">
-        <button onclick="handleLogin()" style="margin-top:20px; padding:10px 30px; background:var(--gold); border:none; border-radius:20px; font-weight:bold;">ENTRER</button>
+    <!-- AUTH -->
+    <div id="auth" style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh;">
+        <h1 class="gold-text">🎰 NKAP EXPRESS</h1>
+        <input type="password" id="code" placeholder="Code Secret" style="padding:10px; border-radius:10px; text-align:center;">
+        <button onclick="login()" style="margin-top:20px; padding:10px 30px; background:#f0b90b; border:none; border-radius:20px; font-weight:bold;">ENTRER</button>
     </div>
 
-    <!-- SECTION JEU (Masquée au début) -->
-    <div id="casino-app" style="display: none; padding: 15px;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="color:var(--green-live); font-weight:bold;">● EN DIRECT</div>
-            <div id="user-balance" style="color:var(--gold); font-weight:bold; font-size:18px;">200 XAF</div>
+    <!-- JEU -->
+    <div id="game" class="hidden">
+        <div class="header">
+            <div style="color:var(--green)">● EN DIRECT</div>
+            <div class="gold-text" id="balance">200 XAF</div>
         </div>
-
-        <div style="text-align:center; margin: 20px 0;">
-            <div id="chrono" class="timer-gold" style="width:60px; height:60px; border:4px solid; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:24px; font-weight:bold;">15</div>
-        </div>
-
-        <div class="room-container" style="height: 50vh; overflow: hidden;">
-            <div id="players-list">
-                <!-- Les bots s'injecteront ici via engine.js -->
-            </div>
-        </div>
-
-        <!-- NAVBAR FIXE -->
-        <div style="position:fixed; bottom:0; left:0; width:100%; display:flex; justify-content:space-around; background:var(--card-bg); padding:15px 0; border-top:1px solid #2d333b;">
-            <div onclick="openModal(UI_TEXTS.history)" style="text-align:center; font-size:10px;">📊<br>HISTO</div>
-            <div onclick="openModal(UI_TEXTS.parrainage)" style="text-align:center; font-size:10px;">👥<br>AMIS</div>
-            <div onclick="alert('Ouvrir plateau de mise')" style="text-align:center; font-size:10px; color:var(--gold);">💰<br><b>MISER</b></div>
-            <div onclick="openModal(UI_TEXTS.banque)" style="text-align:center; font-size:10px;">💳<br>BANQUE</div>
-            <div onclick="openModal(UI_TEXTS.aide)" style="text-align:center; font-size:10px;">❓<br>AIDE</div>
+        <div class="timer-circle" id="chrono">15</div>
+        <div class="room"><div id="players-list"></div></div>
+        <div class="navbar">
+            <div class="nav-item" onclick="showInfo('parrainage')">👥<br>AMIS</div>
+            <div class="nav-item" style="color:var(--gold)" onclick="alert('Mise 1-500F')">💰<br><b>MISER</b></div>
+            <div class="nav-item" onclick="showInfo('banque')">💳<br>BANQUE</div>
+            <div class="nav-item" onclick="showInfo('aide')">❓<br>AIDE</div>
         </div>
     </div>
 
-    <!-- IMPORTATION DE TES FICHIERS JS DANS L'ORDRE LOGIQUE -->
     <script src="names.js"></script>
     <script src="ui.js"></script>
     <script src="engine.js"></script>
-
     <script>
-        // Logique de connexion pour lier les écrans
-        function handleLogin() {
-            let val = document.getElementById('auth-code').value;
-            if(val.length === 5) {
-                document.getElementById('auth-screen').style.display = 'none';
-                document.getElementById('casino-app').style.display = 'block';
-                startEngine(); // On lance le moteur de engine.js
-            } else {
-                alert(UI_TEXTS.auth_error);
+        function login() {
+            if(document.getElementById('code').value.length === 5) {
+                document.getElementById('auth').classList.add('hidden');
+                document.getElementById('game').classList.remove('hidden');
+                window.runCasino();
             }
         }
-
-        // Initialisation WebApp
-        window.onload = () => {
-            if(window.Telegram && window.Telegram.WebApp) {
-                window.Telegram.WebApp.expand();
-            }
-        };
+        window.onload = () => { if(window.Telegram.WebApp) window.Telegram.WebApp.expand(); };
     </script>
 </body>
 </html>
