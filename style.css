@@ -1,45 +1,22 @@
 :root {
     --gold: #f0b90b;
-    --bg-dark: #0b0e11;
-    --card-bg: #1c2128;
-    --text-gray: #848e9c;
-    --green-live: #2ebd85;
-    --red-alert: #ff4d4d;
+    --bg: #0b0e11;
+    --card: #1c2128;
+    --green: #2ebd85;
+    --red: #ff4d4d;
 }
+body { background: var(--bg); color: white; font-family: sans-serif; margin: 0; overflow: hidden; }
+.gold-text { color: var(--gold); }
+.hidden { display: none !important; }
 
-body {
-    background-color: var(--bg-dark);
-    color: white;
-    font-family: 'Segoe UI', Roboto, sans-serif;
-    margin: 0;
-    overflow: hidden;
-}
+/* Header & Chrono */
+.header { padding: 15px; display: flex; justify-content: space-between; background: var(--card); border-bottom: 1px solid #2d333b; }
+.timer-circle { width: 60px; height: 60px; border: 4px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 15px auto; }
 
-/* Style des boutons de la Navbar */
-.nav-icon {
-    font-size: 24px;
-    margin-bottom: 4px;
-    transition: transform 0.2s;
-}
+/* Table des joueurs */
+.room { width: 90%; margin: auto; background: var(--card); border-radius: 15px; height: 50vh; overflow-y: hidden; border: 1px solid #2d333b; position: relative; }
+.row { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #0b0e11; font-size: 13px; }
 
-.nav-item:active .nav-icon {
-    transform: scale(0.9);
-}
-
-/* Graphisme de la Salle */
-.room-container {
-    background: var(--card-bg);
-    border: 1px solid #2d333b;
-    border-radius: 15px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-}
-
-/* Couleurs du Chrono */
-.timer-gold { border-color: var(--gold); color: var(--gold); }
-.timer-red { border-color: var(--red-alert); color: var(--red-alert); animation: pulse 0.5s infinite; }
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
+/* Navbar */
+.navbar { position: fixed; bottom: 0; width: 100%; background: var(--card); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #2d333b; }
+.nav-item { text-align: center; font-size: 10px; color: #848e9c; cursor: pointer; }
